@@ -8,6 +8,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@org.springframework.context.annotation.Profile("!identityos-oidc")
 public class SecurityConfig {
 
     private final RemoteAuthenticationProvider authenticationProvider;

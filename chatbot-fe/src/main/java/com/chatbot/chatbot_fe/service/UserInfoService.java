@@ -22,6 +22,11 @@ public class UserInfoService {
             Authentication auth = SecurityContextHolder.getContext().getAuthentication();
             if (auth != null && auth.isAuthenticated()
                     && !"anonymousUser".equals(auth.getPrincipal())) {
+                if (auth.getPrincipal() instanceof org.springframework.security.oauth2.core.oidc.user.OidcUser oidc) {
+                    String external = oidc.getClaimAsString("external_username");
+                    if (external != null && !external.isBlank()) return external;
+                    return oidc.getPreferredUsername() == null ? oidc.getSubject() : oidc.getPreferredUsername();
+                }
                 return auth.getName();
             }
         } catch (Exception e) {

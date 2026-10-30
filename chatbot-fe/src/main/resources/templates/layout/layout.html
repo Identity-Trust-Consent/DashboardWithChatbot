@@ -373,6 +373,59 @@
             background: var(--primary-dark);
             text-decoration: none;
         }
+        .user-consent-link { margin-top: 10px; border: 0; cursor: pointer; }
+        #givenConsentModal .modal-dialog { max-width: 880px; }
+        #givenConsentModal .modal-content { border: 0; border-radius: 20px; overflow: hidden; box-shadow: 0 24px 80px #14213d33; color: #24324b; }
+        #givenConsentModal .modal-header { padding: 24px 28px; align-items: center; border-bottom: 1px solid #e8edf5; }
+        .consent-dialog-heading { display: flex; align-items: center; gap: 14px; }
+        .consent-dialog-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; background: #edf2ff; color: #4e73df; font-size: 21px; flex-shrink: 0; }
+        .consent-dialog-eyebrow { display: block; margin-bottom: 3px; color: #657591; font-size: 10px; font-weight: 800; letter-spacing: 1.6px; }
+        #givenConsentModal .modal-title { font-size: 23px; font-weight: 800; letter-spacing: -.4px; }
+        #givenConsentModal .close { margin: 0 0 0 12px; padding: 8px 12px; border-radius: 10px; background: #f3f5f9; opacity: 1; color: #657591; text-shadow: none; }
+        #givenConsentModal .modal-body { padding: 20px 28px 24px; background: #f5f7fb; scrollbar-width: thin; }
+        .consent-dialog-intro { color: #657591; font-size: 14px; margin-bottom: 16px; }
+        #givenConsentStatus { font-size: 12px; font-weight: 700; margin-bottom: 12px; }
+        #givenConsentModal .modal-footer { padding: 14px 28px; border-top: 1px solid #e8edf5; gap: 8px; }
+        .consent-footer-note { margin-right: auto; color: #71809a; font-size: 12px; }
+        #givenConsentModal .modal-footer .btn { border-radius: 9px; font-weight: 700; font-size: 13px; padding: 9px 22px; }
+        #givenConsentModal .consent-close-button { background: #edf2ff; color: #3c5dc0; border: 1px solid #e0e7fc; }
+        #givenConsentModal .consent-close-button:hover { background: #e0e7fc; }
+        .consent-record { border: 1px solid #e1e7f0; border-radius: 14px; background: white; margin-bottom: 16px; overflow: hidden; box-shadow: 0 3px 12px #24324b04; }
+        .consent-record:last-child { margin-bottom: 0; }
+        .consent-card-header { padding: 20px 22px 16px; border-bottom: 1px solid #eef1f6; }
+        .consent-card-title-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+        .consent-card-title { margin: 0 0 5px; font-size: 18px; font-weight: 800; color: #24324b; }
+        .consent-card-org { color: #71809a; font-size: 12px; margin: 0; }
+        .consent-status { border-radius: 30px; padding: 5px 11px; font-size: 11px; font-weight: 800; white-space: nowrap; background: #eff2f7; color: #52627c; }
+        .consent-status.active { background: #e7f7ef; color: #14734d; }
+        .consent-status.inactive { background: #fff1e6; color: #95551d; }
+        .consent-policy-tags { display: flex; gap: 7px; flex-wrap: wrap; margin-top: 14px; }
+        .consent-policy-tag { font-size: 11px; font-weight: 700; background: #f2f5fb; border: 1px solid #e9edf5; border-radius: 6px; padding: 4px 9px; color: #586a85; }
+        .consent-card-body { padding: 18px 22px; }
+        .consent-section-label { margin: 0 0 10px; color: #78859b; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
+        .consent-record dl { display: grid; grid-template-columns: 140px minmax(0, 1fr); gap: 10px 18px; margin: 0 0 20px; font-size: 13px; line-height: 1.65; }
+        .consent-record dt { color: #71809a; font-weight: 600; }
+        .consent-record dd { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; color: #34445e; }
+        .consent-data-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+        .consent-data-tag { border: 1px solid #dfe6f4; background: #fafbfe; color: #536783; border-radius: 6px; padding: 5px 10px; font-size: 12px; }
+        .consent-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; border-top: 1px solid #eef1f6; padding-top: 14px; }
+        .consent-date-label { display: block; color: #78859b; font-size: 11px; margin-bottom: 3px; }
+        .consent-date-value { color: #43546e; font-weight: 700; font-size: 12px; }
+        .consent-card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 9px; padding: 14px 22px; background: #fafbfe; border-top: 1px solid #eef1f6; }
+        .consent-action-note { color: #78859b; font-size: 11px; margin-right: auto; }
+        .consent-card-actions .btn { border-radius: 8px; padding: 8px 14px; font-size: 12px; font-weight: 800; }
+        .consent-card-actions .btn-primary { background: #4e73df; border-color: #4e73df; }
+        #givenConsentModal a:focus-visible, #givenConsentModal button:focus-visible { outline: 3px solid #a6baff; outline-offset: 3px; }
+        @media (max-width: 575px) {
+            #givenConsentModal .modal-header, #givenConsentModal .modal-body, #givenConsentModal .modal-footer { padding: 16px; }
+            #givenConsentModal .modal-title { font-size: 20px; }
+            .consent-card-header, .consent-card-body, .consent-card-actions { padding: 16px; }
+            .consent-record dl { grid-template-columns: 1fr; gap: 2px; }
+            .consent-record dd { margin-bottom: 8px; }
+            .consent-dates { grid-template-columns: 1fr; gap: 10px; }
+            .consent-action-note { width: 100%; }
+            .consent-footer-note { display: none; }
+        }
         .user-detail-list {
             display: grid;
             gap: 8px;
@@ -627,6 +680,10 @@
                         <i class="fas fa-shield-heart"></i>
                         <span>Check trust score</span>
                     </a>
+                    <button type="button" class="user-trust-link user-consent-link" data-toggle="modal" data-target="#givenConsentModal">
+                        <i class="fas fa-clipboard-check" aria-hidden="true"></i>
+                        <span>Check given consent</span>
+                    </button>
                     <div class="user-detail-list">
                         <div><span>Username</span><strong id="menuDetailUsername">-</strong></div>
                         <div><span>Client ID</span><strong id="menuDetailClientId">-</strong></div>
@@ -672,6 +729,30 @@
 </div>
 
 <!-- ===================== LOGOUT MODAL ===================== -->
+<div class="modal fade" id="givenConsentModal" tabindex="-1" role="dialog" aria-labelledby="givenConsentTitle" aria-hidden="true"
+     th:data-consent-url="@{/identity/given-consent}">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="consent-dialog-heading">
+                    <span class="consent-dialog-icon"><i class="fas fa-shield-halved" aria-hidden="true"></i></span>
+                    <div><span class="consent-dialog-eyebrow">PRIVACY &amp; PERMISSIONS</span><h5 class="modal-title" id="givenConsentTitle">Your given consents</h5></div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close consent details"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <p class="consent-dialog-intro">Review how your data is used and manage the permissions you have shared.</p>
+                <div id="givenConsentStatus" role="status" aria-live="polite"></div>
+                <div id="givenConsentRecords"></div>
+            </div>
+            <div class="modal-footer">
+                <span class="consent-footer-note"><i class="fas fa-lock mr-1" aria-hidden="true"></i> Your privacy, your choice</span>
+                <button type="button" class="btn btn-outline-primary" id="retryGivenConsent" hidden>Try again</button>
+                <button type="button" class="btn consent-close-button" data-dismiss="modal">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content border-0 shadow-lg" style="border-radius:14px; overflow:hidden;">
@@ -802,6 +883,7 @@
 </script>
 
 <!-- Page-specific scripts slot -->
+<script th:src="@{/js/given-consent.js(v='20261023-4')}"></script>
 <th:block layout:fragment="scripts"></th:block>
 
 </body>

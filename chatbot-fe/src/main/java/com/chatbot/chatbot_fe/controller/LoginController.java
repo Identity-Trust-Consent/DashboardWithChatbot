@@ -19,6 +19,10 @@ import java.util.List;
 
 @Controller
 public class LoginController {
+    private final com.chatbot.chatbot_fe.config.LegacyIdentityTokenValidator legacyTokens;
+    public LoginController(com.chatbot.chatbot_fe.config.LegacyIdentityTokenValidator legacyTokens) { this.legacyTokens=legacyTokens; }
+    @Value("${identity.os.oidc.enabled:false}")
+    private boolean oidcEnabled;
 
     @Value("${identity.os.base-url}")
     private String identityBaseUrl;
@@ -49,11 +53,13 @@ public class LoginController {
             @RequestParam(value = "error", required = false) String error,
             @RequestParam(value = "logout", required = false) String logout,
             Model model) {
+        if (oidcEnabled) return "redirect:/oauth2/authorization/identityos";
         return "redirect:" + buildIdentityUrl(loginPath);
     }
 
     @GetMapping("/register")
     public String registerPage(Model model) {
+        if (oidcEnabled) return "redirect:/oauth2/authorization/identityos";
         return "redirect:" + buildIdentityUrl(registerPath);
     }
 
@@ -89,9 +95,9 @@ public class LoginController {
             HttpServletRequest request,
             Model model) {
 
-        String credential = firstNonBlank(accessToken, code);
+        String credential = accessToken;
         if (credential == null) {
-            model.addAttribute("errorMsg", "Identity OS did not return an access token or code.");
+            model.addAttribute("errorMsg", "A verified access token is required. Authorization codes use the OIDC callback.");
             addIdentityModel(model);
             return "callback";
         }
@@ -102,10 +108,17 @@ public class LoginController {
             return "callback";
         }
 
-        String resolvedTokenType = firstNonBlank(tokenType, "Bearer");
-        String resolvedUsername = firstNonBlank(username, "identity_os_user");
+        final org.springframework.security.oauth2.jwt.Jwt verified;
+        try { verified=legacyTokens.validate(credential); }
+        catch(org.springframework.security.oauth2.jwt.JwtException invalid) {
+            model.addAttribute("errorMsg", "Identity OS returned an invalid or expired access token.");
+            return "callback";
+        }
+        String resolvedTokenType = "Bearer";
+        String resolvedUsername = firstNonBlank(verified.getClaimAsString("external_username"), verified.getSubject());
 
         HttpSession session = request.getSession(true);
+        request.changeSessionId();
         session.setAttribute("access_token", accessToken);
         session.setAttribute("accessToken", accessToken);
         session.setAttribute("identity_code", code);
@@ -139,6 +152,8 @@ public class LoginController {
 
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request) {
+        // In OIDC mode logout is a CSRF-protected POST /perform-logout handled by Spring.
+        if (oidcEnabled) return "logout";
         SecurityContextHolder.clearContext();
         HttpSession session = request.getSession(false);
         if (session != null) {
